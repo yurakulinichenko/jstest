@@ -1,5 +1,15 @@
 "use strict";
-let a = [1, 2, 3, 4, 5];
-let c = [6, 7, 8, 9];
-a.splice(2, 1, c);
-console.log(a);
+let person = {};
+(async () => {
+  let response = await fetch("https://yurii-cv-api.azurewebsites.net/");
+  person = await response.json();
+  console.log(person);
+  let position = (document.querySelector(".about-position").innerHTML =
+    person.position);
+  let name = (document.querySelector(".about-name").innerHTML =
+    person.firstName + " " + person.lastName);
+  let tel = (document.querySelector(".tel").innerHTML =
+    person.contacts[1].value);
+  let mail = (document.querySelector(".mail").innerHTML =
+    person.contacts[0].value);
+})();
