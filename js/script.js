@@ -56,3 +56,37 @@ let person = {};
     exp.appendChild(responsib);
   });
 })();
+
+(async () => {
+  let response = await fetch(
+    "https://yurii-cv-api.azurewebsites.net/education"
+  );
+  let education = await response.json();
+
+  let educ = document.querySelector(".education");
+  let university = education.highEducations.map((value, index) => {
+    let univer = document.createElement("p");
+    univer.classList.add("university");
+    univer.innerHTML = education.highEducations[index].university;
+    educ.appendChild(univer);
+
+    let faculty = document.createElement("p");
+    faculty.classList.add("faculty");
+    faculty.innerHTML = education.highEducations[index].specialization;
+    educ.appendChild(faculty);
+
+    let period = document.createElement("p");
+    period.innerHTML =
+      education.highEducations[index].from +
+      " - " +
+      education.highEducations[index].to;
+    period.classList.add("years");
+    let line = document.createElement("span");
+    line.classList.add("line");
+    line.innerText = " | ";
+    period.appendChild(line);
+    educ.appendChild(period);
+    let country = education.highEducations[index].country;
+    period.append(country);
+  });
+})();
