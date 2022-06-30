@@ -90,3 +90,65 @@ let person = {};
     period.append(country);
   });
 })();
+
+(async () => {
+  let response = await fetch(
+    "https://yurii-cv-api.azurewebsites.net/education"
+  );
+  let training = await response.json();
+  let course = document.querySelector(".training");
+  let trainingCourses = training.trainings.map((value, index) => {
+    let org = document.createElement("p");
+    org.classList.add("course-org");
+    org.innerHTML = training.trainings[index].organization;
+    course.appendChild(org);
+
+    let courseList = document.createElement("ul");
+    courseList.classList.add("course-list");
+    let arr = training.trainings[index].subjects;
+    for (let i = 0; i < arr.length; i++) {
+      let li = document.createElement("li");
+      li.classList.add("course-list-item");
+      courseList.appendChild(li);
+      li.innerHTML = li.innerHTML + arr[i];
+    }
+    course.appendChild(courseList);
+  });
+})();
+
+(async () => {
+  let response = await fetch("https://yurii-cv-api.azurewebsites.net/skills");
+  let skills = await response.json();
+  let hard = skills.filter((index, type) => index.type == "Hard");
+  let soft = skills.filter((index, type) => index.type == "Soft");
+
+  let techSkills = document.querySelector(".tech-skills");
+  let hardSkills = document.createElement("ul");
+  hardSkills.classList.add("tech-skills-list");
+  let arr = hard;
+  for (let i = 0; i < arr.length; i++) {
+    let li = document.createElement("li");
+    li.classList.add("tech-skills-item");
+    hardSkills.appendChild(li);
+    let hardList = document.createElement("span");
+    hardList.classList.add("tech-skills-text");
+    hardList.innerHTML = arr[i].name;
+    li.appendChild(hardList);
+  }
+  techSkills.appendChild(hardSkills);
+
+  let softSkills = document.querySelector(".soft-skills");
+  let softSk = document.createElement("ul");
+  softSk.classList.add("soft-skills-list");
+  let array = soft;
+  for (let i = 0; i < array.length; i++) {
+    let li = document.createElement("li");
+    li.classList.add("soft-skills-item");
+    softSk.appendChild(li);
+    let softList = document.createElement("span");
+    softList.classList.add("soft-skills-text");
+    softList.innerHTML = array[i].name;
+    li.appendChild(softList);
+  }
+  softSkills.appendChild(softSk);
+})();
