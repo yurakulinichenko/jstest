@@ -1,5 +1,5 @@
 "use strict";
-const baseUrl = "https://yurii-cv-api.azurewebsites.net/";
+const baseUrl = "https://yurii-cv-api.azurewebsites.net/1";
 
 function formatDate(date) {
   return moment(date).format("MMMM YYYY");
