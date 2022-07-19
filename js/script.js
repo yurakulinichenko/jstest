@@ -1,5 +1,5 @@
 "use strict";
-const baseUrl = "https://yurii-cv-api.azurewebsites.net/1/";
+const baseUrl = "https://yurii-cv-api.azurewebsites.net/1";
 
 function formatDate(date) {
   return moment(date).format("MMMM YYYY");
@@ -19,7 +19,7 @@ const displayUserInfo = async () => {
 };
 
 const displayUserExperience = async () => {
-  const response = await fetch(`${baseUrl}experience`);
+  const response = await fetch(`${baseUrl}/experience`);
   const workExp = await response.json();
 
   const experience = document.querySelector(".work");
@@ -60,7 +60,7 @@ const displayUserExperience = async () => {
 };
 
 const displayUserEducation = async () => {
-  const response = await fetch(`${baseUrl}education`);
+  const response = await fetch(`${baseUrl}/education`);
   const education = await response.json();
 
   const highEducation = document.querySelector(".education");
@@ -92,7 +92,7 @@ const displayUserEducation = async () => {
 };
 
 const displayUserCourses = async () => {
-  const response = await fetch(`${baseUrl}education`);
+  const response = await fetch(`${baseUrl}/education`);
   const training = await response.json();
   const course = document.querySelector(".training");
   training.trainings.map((value, index) => {
@@ -115,7 +115,7 @@ const displayUserCourses = async () => {
 };
 
 const displayUserSkills = async () => {
-  const response = await fetch(`${baseUrl}skills`);
+  const response = await fetch(`${baseUrl}/skills`);
   const skills = await response.json();
   const hard = skills.filter((skills) => skills.type == "Hard");
   const soft = skills.filter((skills) => skills.type == "Soft");
